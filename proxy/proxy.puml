@@ -2,24 +2,25 @@
 
 together {
     class Client
-    interface Server
+    interface Subject
 }
 
-interface Server {
-    {abstract} handleRequest()
+interface Subject {
+    {abstract} request()
 }
 
-Server <- Client
+Subject <- Client
 
 together {
-    class api
-    class nginx
+    class Proxy
+    class RealSubject
 }
 
-api : handleRequest()
-nginx : handleRequest()
+Proxy : request()
+RealSubject : request()
 
-Server <|.. api
-Server <|.. nginx
-nginx o-> api : subject
+Subject <|.. Proxy
+Subject <|.. RealSubject
+
+Proxy o-> RealSubject : subject
 @endum
