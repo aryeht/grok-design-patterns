@@ -1,0 +1,28 @@
+@startuml
+
+Cache : evictionAlgo
+Cache : setevictionAlgo(evictionAlgo)
+
+together {
+    class Cache
+    interface Strategy
+}
+
+interface Strategy {
+    {abstract} doSomething()
+}
+
+Client --> Cache
+Strategy <- Cache
+
+together {
+    class "Concrete strategy 1" as s1
+    class "Concrete strategy 2" as s2
+}
+
+s1 : doSomething()
+s2 : doSomething()
+
+Strategy <|.. s1
+Strategy <|.. s2
+@endum

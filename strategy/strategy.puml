@@ -1,0 +1,31 @@
+@startuml
+
+Context : strategy
+Context : setStrategy(strategy)
+
+together {
+    class Context
+    interface EvictionAlgo
+}
+
+interface EvictionAlgo {
+    {abstract} evict()
+}
+
+Client --> Context
+EvictionAlgo <- Context
+
+together {
+    class "FIFO" as fifo
+    class "LRU" as lru
+    class "LFU" as lfu
+}
+
+fifo : evict()
+lru : evict()
+lfu : evict()
+
+EvictionAlgo <|.. fifo
+EvictionAlgo <|.. lru
+EvictionAlgo <|.. lfu
+@endum

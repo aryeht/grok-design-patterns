@@ -1,0 +1,25 @@
+@startuml
+
+together {
+    class Client
+    interface Server
+}
+
+interface Server {
+    {abstract} handleRequest()
+}
+
+Server <- Client
+
+together {
+    class api
+    class nginx
+}
+
+api : handleRequest()
+nginx : handleRequest()
+
+Server <|.. api
+Server <|.. nginx
+nginx o-> api : subject
+@endum

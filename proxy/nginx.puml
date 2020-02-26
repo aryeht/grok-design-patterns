@@ -1,0 +1,26 @@
+@startuml
+
+together {
+    class Client
+    interface Subject
+}
+
+interface Subject {
+    {abstract} request()
+}
+
+Subject <- Client
+
+together {
+    class Proxy
+    class RealSubject
+}
+
+Proxy : request()
+RealSubject : request()
+
+Subject <|.. Proxy
+Subject <|.. RealSubject
+
+Proxy o-> RealSubject : subject
+@endum
